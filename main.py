@@ -1,4 +1,7 @@
+import asyncio
+import time
 from typing import Optional
+from urllib import response
 from fastapi import BackgroundTasks, FastAPI
 from backgrounds import write_notification
 
@@ -37,3 +40,22 @@ def send_notification(email: str, background_tasks: BackgroundTasks):
     return {"message": "Notification sent in the background"}
 
 
+@app.get('/concurrent')
+async def conc():
+    tasks = []
+    start = time.time()
+    for i in range(2):
+        tasks.append(asyncio.create_task(func1()))
+        tasks.append(asyncio.create_task(func2()))
+    response = await asyncio.gather(*tasks)
+    end = time.time()
+    return {'response': response, 'time_taken': (end-start)}
+
+
+async def func1():
+    await asyncio.sleep(2)
+    return "Func1() Completed"
+
+async def func2():
+    await asyncio.sleep(1)
+    return "Func2() Completed"
