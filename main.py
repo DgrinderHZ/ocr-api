@@ -1,6 +1,6 @@
 from typing import Optional
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import BackgroundTasks, FastAPI
+from backgrounds import write_notification
 
 from models import Course
 
@@ -30,3 +30,10 @@ def read_courses(start: int = 0, end: int = 10):
 @app.post('/create')
 def create(course: Course):
     return course
+
+@app.post("/send-notification/{email}")
+def send_notification(email: str, background_tasks: BackgroundTasks):
+    background_tasks.add_task(write_notification, email, message="some notification")
+    return {"message": "Notification sent in the background"}
+
+
