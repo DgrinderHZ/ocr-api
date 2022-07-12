@@ -1,7 +1,9 @@
 import asyncio
+import os
 import pytesseract
 
-pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+if os.environ["ENV_VAR"] == "WIN":
+    pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
 
 async def read_image(img_path, lang='eng'):
     try:
