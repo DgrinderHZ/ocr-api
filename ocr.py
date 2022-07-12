@@ -4,6 +4,8 @@ import pytesseract
 
 if os.environ["ENV_VAR"] == "WIN":
     pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+elif os.environ["ENV_VAR"] == "her":
+    pytesseract.pytesseract.tesseract_cmd = "/app/.apt/usr/bin/tesseract"
 
 async def read_image(img_path, lang='eng'):
     try:
