@@ -33,8 +33,8 @@ async def extract_text(Images: List[UploadFile] = File(...)):
     return response
 
 
-@app.post("/predict") 
-def prediction(file: bytes = File(...)):
-    label = ocr.read_image2(utils._return_img(file))
-    return {'image content': label}
+# @app.post("/predict") 
+# def prediction(file: bytes = File(...)):
+#     label = ocr.read_image2(utils._return_img(file))
+#     return {'image content': label}
 
