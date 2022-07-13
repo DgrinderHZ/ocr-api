@@ -15,6 +15,14 @@ async def read_image(img_path, lang='eng'):
     except:
         return "[ERROR] Unable to process file: {0}".format(img_path)
 
+def read_image2(img_path, lang='eng'):
+    try:
+        text = pytesseract.image_to_string(img_path, lang=lang)
+        return text
+    except:
+        return "[ERROR] Unable to process file: {0}".format(img_path)
+
+
 # img_path = 'rd.jpeg'
 # lang = 'eng'
 # text = pytesseract.image_to_string(img_path, lang=lang)
